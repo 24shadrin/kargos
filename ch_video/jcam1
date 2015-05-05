@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+
+@dat=($day, $month, $year) = (localtime(time-86400))[3,4,5];
+
+$t1=@dat[0];
+$t2=@dat[1]+1;
+$t3=@dat[2]+1900;
+$t0=0;
+
+
+if ( $t1 < 10 )
+{
+$tt=$t0.$t1;
+}
+
+else
+{
+$tt=$t1;
+}
+
+if ( $t2 < 10 )
+{
+$dd=$t0.$t2;
+}
+
+else
+{
+$dd=$t2;
+}
+
+$truedat=join('-',$t3,$dd,$tt);
+$avi=".avi";
+$fn=$truedat.$avi;
+
+$path="/video/zhostovo/camera1/$fn";
+
+if (-e $path) { print "jcam1 is OK"; exit(0);}
+else { print "check file jcam1"; exit(2); }
+print "\n";

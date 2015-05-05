@@ -1,0 +1,16 @@
+May 5 
+14>02>42
+ok
+cam1_ok
+camera1/2015-05-04.avi
+325099Kb
+cam3_ok
+camera3/2015-05-04.avi
+348766Kb
+bw_penta_ok
+2015-May-04.avi
+13700Kb
+bw_karg_ok
+2015-May-04.avi
+60481Kb
+

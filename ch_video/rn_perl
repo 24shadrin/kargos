@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /etc/mysc/ch_video
+
+/usr/bin/perl /etc/mysc/ch_video/ch_send
