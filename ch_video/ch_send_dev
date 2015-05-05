@@ -1,0 +1,129 @@
+#!/usr/bin/perl
+
+require "sfile";
+require "sfile_bw";
+
+$name=$sfile::fullpath;
+
+$name_bw=$sfile_bw::fn;
+
+
+$ext=".avi";
+$f_name=$name.$ext;
+
+
+$f_cam1="/video/zhostovo/camera1/$f_name";
+
+$f_cam3="/video/zhostovo/camera3/$f_name";
+
+$f_bw_karg="/video/karg/$name_bw";
+
+$f_bw_penta="/video/penta/$name_bw";
+
+
+
+    if (-e $f_cam1) {
+$cam1=1;
+$cm1="cam1_ok";
+}
+    else {
+$cam1=0;
+$cm1="cam1_error";
+}
+
+    if (-e $f_cam3) {
+$cam3=1;
+$cm3="cam3_ok";
+}
+    else {
+$cam3=0;
+$cm3="cam3_error";
+}
+
+    if (-e $f_bw_penta) {
+$f_penta=1;
+$cmpenta="bw_penta_ok";
+}
+    else {
+$f_penta=0;
+$cmpenta="bw_penta_error";
+}
+
+    if (-e $f_bw_karg) {
+$f_karg=1;
+$cmkarg="bw_karg_ok";
+}
+    else {
+$f_karg=0;
+$cmkarg="bw_karg_error";
+}
+
+
+
+$summ=$cam1+$cam3+$f_penta+$f_karg;
+
+    $dt=localtime;
+@mas=split(" ",$dt);
+
+     open(my $filo, '>', 'report.txt');
+
+#print $filo $mas[1],' ',$mas[2],' ', $mas[3], "\n";
+
+print $filo $mas[1],' ', $mas[2],' ', "\n";
+@tm=split(":", $mas[3]);
+$tm=join(">",$tm[0],$tm[1],$tm[2]);
+print $filo $tm, "\n";
+
+if ($summ != 4) {
+print $filo "something went wrong", "\n";
+print $filo $cm1, "\n";
+print $filo $cm3, "\n";
+print $filo $cmpenta, "\n";
+print $filo $cmkarg, "\n";
+print $filo "\n";
+}
+
+else {
+print $filo "ok", "\n";
+print $filo $cm1, "\n";
+
+$size= -s "$f_cam1";
+$size=int($size/1024);
+@f=split("/",$f_cam1);
+print $filo $f[3],"/",$f[4], "\n";
+print $filo $size, "Kb", "\n";
+
+print $filo $cm3, "\n";
+
+$size= -s "$f_cam3";
+$size=int($size/1024);
+@f=split("/",$f_cam3);
+print $filo $f[3],"/",$f[4], "\n";
+print $filo $size, "Kb", "\n";
+
+
+print $filo $cmpenta, "\n";
+
+$size= -s "$f_bw_penta";
+$size=int($size/1024);
+@f=split("/",$f_bw_penta);
+print $filo $f[3], "\n";
+print $filo $size, "Kb", "\n";
+
+
+print $filo $cmkarg. "\n";
+
+$size= -s "$f_bw_karg";
+$size=int($size/1024);
+@f=split("/",$f_bw_karg);
+print $filo $f[3], "\n";
+print $filo $size, "Kb", "\n";
+
+print $filo "\n";
+
+}
+
+close $filo;
+
+system "/bin/cat /etc/mysc/ch_video/report.txt | /usr/sbin/ssmtp n.v.shadrin"
+
