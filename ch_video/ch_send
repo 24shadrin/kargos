@@ -92,6 +92,7 @@ $size=int($size/1024);
 @f=split("/",$f_cam1);
 print $filo $f[3],"/",$f[4], "\n";
 print $filo $size, "Kb", "\n";
+print $filo " ", "\n";
 
 print $filo $cm3, "\n";
 
@@ -100,7 +101,7 @@ $size=int($size/1024);
 @f=split("/",$f_cam3);
 print $filo $f[3],"/",$f[4], "\n";
 print $filo $size, "Kb", "\n";
-
+print $filo " ", "\n";
 
 print $filo $cmpenta, "\n";
 
@@ -109,7 +110,7 @@ $size=int($size/1024);
 @f=split("/",$f_bw_penta);
 print $filo $f[3], "\n";
 print $filo $size, "Kb", "\n";
-
+print $filo " ", "\n";
 
 print $filo $cmkarg. "\n";
 
@@ -118,6 +119,7 @@ $size=int($size/1024);
 @f=split("/",$f_bw_karg);
 print $filo $f[3], "\n";
 print $filo $size, "Kb", "\n";
+print $filo " ", "\n";
 
 print $filo "\n";
 
