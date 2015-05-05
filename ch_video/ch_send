@@ -1,4 +1,4 @@
-#!/usr/bin/perl -W
+#!/usr/bin/perl
 
 require "sfile";
 require "sfile_bw";
@@ -21,15 +21,6 @@ $f_bw_karg="/video/karg/$name_bw";
 $f_bw_penta="/video/penta/$name_bw";
 
 
-#if ((-e $f_cam1) && (-e $f_cam3) && (-e $f_bw_penta) && (-e $f_bw_karg)) {
-#print "Ok";
-#print "\n";
-#}
-
-#else {
-#print "some went wrong";
-#print "\n";
-#}
 
     if (-e $f_cam1) {
 $cam1=1;
@@ -50,26 +41,26 @@ $cm3="cam3_error";
 }
 
     if (-e $f_bw_penta) {
-$f_bw_penta=1;
+$f_penta=1;
 $cmpenta="bw_penta_ok";
 }
     else {
-$f_bw_penta=0;
+$f_penta=0;
 $cmpenta="bw_penta_error";
 }
 
     if (-e $f_bw_karg) {
-$f_bw_karg=1;
+$f_karg=1;
 $cmkarg="bw_karg_ok";
 }
     else {
-$f_bw_penta=0;
+$f_karg=0;
 $cmkarg="bw_karg_error";
 }
 
 
 
-$summ=$cam1+$cam3+$f_bw_penta+$f_bw_karg;
+$summ=$cam1+$cam3+$f_penta+$f_karg;
 
     $dt=localtime;
 @mas=split(" ",$dt);
@@ -95,9 +86,39 @@ print $filo "\n";
 else {
 print $filo "ok", "\n";
 print $filo $cm1, "\n";
+
+$size= -s "$f_cam1";
+$size=int($size/1024);
+@f=split("/",$f_cam1);
+print $filo $f[3],"/",$f[4], "\n";
+print $filo $size, "Kb", "\n";
+
 print $filo $cm3, "\n";
+
+$size= -s "$f_cam3";
+$size=int($size/1024);
+@f=split("/",$f_cam3);
+print $filo $f[3],"/",$f[4], "\n";
+print $filo $size, "Kb", "\n";
+
+
 print $filo $cmpenta, "\n";
+
+$size= -s "$f_bw_penta";
+$size=int($size/1024);
+@f=split("/",$f_bw_penta);
+print $filo $f[3], "\n";
+print $filo $size, "Kb", "\n";
+
+
 print $filo $cmkarg. "\n";
+
+$size= -s "$f_bw_karg";
+$size=int($size/1024);
+@f=split("/",$f_bw_karg);
+print $filo $f[3], "\n";
+print $filo $size, "Kb", "\n";
+
 print $filo "\n";
 
 }
