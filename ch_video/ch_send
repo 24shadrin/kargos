@@ -20,10 +20,24 @@ $f_bw_karg="/video/karg/$name_bw";
 
 $f_bw_penta="/video/penta/$name_bw";
 
+#------------------------------------------
+$sz_fcam1= -s "$f_cam1";
+$sz_fcam1=int($sz_fcam1/1024);
+
+$sz_fcam3= -s "$f_cam3";
+$sz_fcam3=int($sz_fcam3/1024);
+
+$sz_f_bw_karg= -s "$f_bw_karg";
+$sz_f_bw_karg=int($sz_f_bw_karg/1024);
+
+$sz_f_bw_penta= -s "$f_bw_penta";
+$sz_f_bw_penta=int($sz_f_bw_penta/1024);
+#-----------------------------------------------------
 
 
-    if (-e $f_cam1) {
+    if ((-e $f_cam1) && ($sz_fcam1 > 350000)) {
 $cam1=1;
+print "zer good";
 $cm1="cam1_ok";
 }
     else {
@@ -31,9 +45,10 @@ $cam1=0;
 $cm1="cam1_error";
 }
 
-    if (-e $f_cam3) {
+    if ((-e $f_cam3) && ($sz_fcam3 > 380000)) {
 $cam3=1;
 $cm3="cam3_ok";
+print "zer good2";
 }
     else {
 $cam3=0;
@@ -76,10 +91,10 @@ print $filo $tm, "\n";
 
 if ($summ != 4) {
 print $filo "something went wrong", "\n";
-print $filo $cm1, "\n";
-print $filo $cm3, "\n";
-print $filo $cmpenta, "\n";
-print $filo $cmkarg, "\n";
+print $filo $cm1," ", $sz_fcam1, " kb", "\n";
+print $filo $cm3," ", $sz_fcam3, " kb", "\n";
+print $filo $cmpenta, " " ,$sz_f_bw_penta, " kb", "\n";
+print $filo $cmkarg, " ",$sz_f_bw_karg, " kb", "\n";
 print $filo "\n";
 }
 
