@@ -35,9 +35,8 @@ $sz_f_bw_penta=int($sz_f_bw_penta/1024);
 #-----------------------------------------------------
 
 
-    if ((-e $f_cam1) && ($sz_fcam1 > 350000)) {
+    if ((-e $f_cam1) && ($sz_fcam1 > 340000)) {
 $cam1=1;
-print "zer good";
 $cm1="cam1_ok";
 }
     else {
@@ -45,10 +44,9 @@ $cam1=0;
 $cm1="cam1_error";
 }
 
-    if ((-e $f_cam3) && ($sz_fcam3 > 380000)) {
+    if ((-e $f_cam3) && ($sz_fcam3 > 360000)) {
 $cam3=1;
 $cm3="cam3_ok";
-print "zer good2";
 }
     else {
 $cam3=0;
