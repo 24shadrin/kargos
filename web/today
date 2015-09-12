@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+@dat=($day, $month, $year) = (localtime)[3,4,5];
+
+$t1=@dat[0];
+$t2=@dat[1]+1;
+$t3='-';
+$t4=@dat[2]+1900;
+
+$trr=join('-',$t4,$t2,$t1);
+print $trr;
+print "\n";
+
