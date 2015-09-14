@@ -7,10 +7,20 @@
 $url="http://192.168.0.200/web/timelapse/";
 $filo="/var/www/web/timelapse/today.avi";
 $time=localtime;
+$lock="/var/www/web/lock/lock";
 
-$tm=system "/var/www/web/tm";
+#$tm=system "/var/www/web/tm";
 read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
 print $bufer;
+
+if(-e "$lock"){
+print "<p style=font-family:times;font-size:400%;color:red>";
+print "Процесс склейки уже запущен. Попробуйте через 5 минут.";
+}
+else
+{
+$tm=system "/var/www/web/tm";
+
 
 if(-e "$filo") {
 print "<img src=images/beward.jpg>";
@@ -38,5 +48,5 @@ print "<p style=font-family:times;font-size:400%;color:red>";
 print "Что-то пошло не так. Попробуйте через 5 минут";
 print "</p>";
 }
-
+}
 print "\n";
